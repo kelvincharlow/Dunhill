@@ -1,0 +1,59 @@
+.hero { width:calc(100% - 112px); max-width:1360px; margin:0 auto; padding-top:42px; }
+.heading { display:flex; align-items:flex-end; justify-content:space-between; gap:32px; padding-bottom:32px; }
+.title { min-width:0; }
+.title h1 { font-size:clamp(52px,5.6vw,84px); font-weight:500; letter-spacing:-.065em; line-height:1.1; margin:17px 0 0; text-wrap:nowrap; }
+.tagline { font-family:var(--serif); font-style:italic; font-size:clamp(38px,3.9vw,58px); line-height:1.02; color:#73856b; letter-spacing:-.035em; margin-top:3px; }
+.introduction { flex:0 0 258px; padding-bottom:3px; }
+.introduction>p { font-size:12px; line-height:1.8; margin-bottom:19px; }
+.introduction>a { font-size:12px; min-height:50px; }
+.visual { position:relative; margin:0; height:clamp(450px,58vh,640px); overflow:hidden; background:#cbd8ce; }
+.visual>img { object-fit:cover; object-position:center 44%; }
+.visual::after { content:""; position:absolute; inset:45% 0 0; background:linear-gradient(transparent,rgba(11,29,29,.72)); pointer-events:none; }
+.edition { position:absolute; top:24px; left:26px; padding:10px 13px; background:var(--paper); color:var(--ink); font-size:9px; font-weight:650; letter-spacing:.14em; }
+.caption { position:absolute; z-index:1; bottom:0; left:0; width:100%; display:flex; align-items:flex-end; gap:35px; color:white; padding:26px 30px; }
+.caption>div { display:flex; flex-direction:column; gap:7px; }
+.caption>div>span { font-size:9px; letter-spacing:.15em; color:#e2ebe2; }
+.caption strong { font-size:27px; font-weight:500; letter-spacing:-.04em; line-height:1.2; }
+.caption>p { font-size:12px; color:white; margin-bottom:4px; }
+.caption>a { margin-left:auto; display:flex; align-items:center; gap:25px; font-size:12px; font-weight:550; min-height:48px; }
+.caption>a>span { width:46px; height:46px; display:grid; place-items:center; border:1px solid #ffffff80; font-size:23px; transition:background .2s,color .2s; }
+.caption>a:hover>span { background:var(--paper); color:var(--ink); }
+@media(max-width:1199px) {
+  .hero { width:calc(100% - 72px); padding-top:32px; }
+  .title h1 { font-size:clamp(44px,5.4vw,65px); }
+  .tagline { font-size:43px; }
+  .introduction { flex-basis:215px; }
+  .heading { gap:22px; }
+}
+@media(max-width:800px) {
+  .hero { width:calc(100% - 44px); padding-top:30px; }
+  .heading { flex-direction:column; align-items:flex-start; gap:22px; padding-bottom:28px; }
+  .title h1 { text-wrap:balance; font-size:clamp(48px,8vw,64px); max-width:650px; line-height:1.02; }
+  .tagline { font-size:clamp(35px,6.3vw,46px); margin-top:9px; }
+  .introduction { flex-basis:auto; display:flex; align-items:center; gap:30px; width:100%; justify-content:space-between; }
+  .introduction>p { font-size:12px; margin:0; }
+  .visual { height:440px; }
+  .visual>img { object-position:54% center; }
+  .caption { padding:22px; gap:20px; flex-wrap:wrap; }
+  .caption strong { font-size:25px; }
+  .caption>p { display:none; }
+  .caption>div::after { content:"Westlands, Nairobi"; font-size:11px; color:#e2ebe2; }
+  .caption>a { gap:12px; }
+  .edition { top:18px; left:18px; font-size:8px; }
+}
+@media(max-width:520px) {
+  .introduction { display:block; }
+  .introduction>p { margin-bottom:18px; }
+  .visual { height:380px; }
+  .caption { padding:20px 18px; }
+  .caption>a { font-size:0; gap:0; }
+  .caption>a>span { width:44px; height:44px; }
+  .title h1 { max-width:350px; }
+}
+@media(max-width:360px) {
+  .title h1 { font-size:43px; }
+  .tagline { font-size:32px; }
+  .visual { height:340px; }
+  .caption strong { font-size:22px; }
+}
+@media(prefers-reduced-motion:reduce) { .caption>a>span { transition:none; } }
