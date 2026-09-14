@@ -37,4 +37,4 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 
 ## Sanity project editor
 
-Sanity powers the project grid, detail galleries and featured homepage projects, with existing records as an empty-dataset fallback. See the [Sanity setup and editing guide](docs/sanity.md) for configuration, publishing, deployment and validation.
+Sanity powers the project grid, detail galleries and featured homepage projects, using published Sanity content exclusively for the visual portfolio. See the [Sanity setup and editing guide](docs/sanity.md) for configuration, publishing, deployment and validation.

@@ -44,7 +44,7 @@ test("featured selection and category return links use CMS records", () => {
   assert.equal(portfolioState("invalid", [project, another]).visible.length, 2);
 });
 
-test("queries exclude drafts, support empty fallback, new slugs and CMS authority", async () => {
+test("queries exclude drafts, support empty states, new slugs and CMS authority", async () => {
   const originalFetch = globalThis.fetch;
   const originalId = process.env.SANITY_STUDIO_PROJECT_ID;
   const originalDataset = process.env.SANITY_STUDIO_DATASET;
@@ -59,19 +59,25 @@ test("queries exclude drafts, support empty fallback, new slugs and CMS authorit
     return Response.json({ result });
   };
   try {
-    assert.equal((await getProjects()).filter(p => p.image).length, 2);
+    assert.equal((await getProjects()).filter(p => p.image).length, 0);
     result = [doc, { ...doc, _id: "duplicate" }];
     assert.deepEqual((await getProjects()).map(p => p.slug), ["new-courtyard"]);
     assert.equal((await getProject("new-courtyard"))?.title, doc.title);
-    assert.equal((await getProject("crescent-pearl"))?.title, "Crescent Pearl");
+    assert.equal(await getProject("crescent-pearl"), undefined);
+    assert.equal(await getProject("national-park-villas"), undefined);
     assert.equal(await getProject("unknown-project"), undefined);
     assert.equal((await getProject("pms-warehousing"))?.slug, "pms-warehousing");
+    result = [{ ...doc, slug: { current: "crescent-pearl" } }];
+    assert.equal((await getProject("crescent-pearl"))?.title, doc.title);
+    result = [];
+    assert.equal(await getProject("crescent-pearl"), undefined);
+    assert.deepEqual(featuredProjects(await getProjects()), []);
     result = [{ ...doc, coverImage: null }];
     assert.equal((await getProjects()).length, 0);
     globalThis.fetch = async () => new Response("Unavailable", { status: 503 });
     const originalError = console.error;
     console.error = () => {};
-    try { assert.equal((await getProjects()).filter(p => p.image).length, 2); }
+    try { assert.equal((await getProjects()).filter(p => p.image).length, 0); }
     finally { console.error = originalError; }
   } finally {
     globalThis.fetch = originalFetch;

@@ -11,7 +11,7 @@ export const projectsQuery = `*[_type == "project" && !(_id in path("drafts.**")
 export const getProjects = cache(async (): Promise<Project[]> => {
   const projectId = process.env.SANITY_STUDIO_PROJECT_ID;
   const dataset = process.env.SANITY_STUDIO_DATASET;
-  if (!projectId || !dataset) return localProjects;
+  if (!projectId || !dataset) return [];
   if (!/^[a-z0-9]+$/.test(projectId) || !/^[a-z0-9_-]+$/.test(dataset)) throw new Error("Invalid Sanity project ID or dataset configuration");
   const url = new URL(`https://${projectId}.api.sanity.io/v2025-02-19/data/query/${dataset}`);
   url.searchParams.set("query", projectsQuery);
@@ -21,7 +21,7 @@ export const getProjects = cache(async (): Promise<Project[]> => {
     if (!response.ok) throw new Error(`Sanity returned HTTP ${response.status}`);
     const { result } = await response.json();
     if (!Array.isArray(result)) throw new Error("Unexpected Sanity response");
-    if (!result.length) return localProjects;
+    if (!result.length) return [];
     const seen = new Set<string>();
     return result.map(item => sanityProject(item, projectId, dataset)).filter((project): project is Project => {
       if (!project || seen.has(project.slug)) return false;
@@ -29,8 +29,8 @@ export const getProjects = cache(async (): Promise<Project[]> => {
       return true;
     });
   } catch (error) {
-    console.error("Sanity projects unavailable; using company-profile records.", error);
-    return localProjects;
+    console.error("Sanity projects unavailable; no portfolio projects returned.", error);
+    return [];
   }
 });
 

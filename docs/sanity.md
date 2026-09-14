@@ -1,6 +1,6 @@
 # Project editing with Sanity
 
-The website reads published Sanity projects for the grid, detail pages and homepage. Existing local records remain the fallback when the dataset contains no published project documents or the API is unavailable. Once published project documents exist, Sanity controls the visual portfolio; incomplete records are omitted rather than replaced with local cards.
+The website reads published Sanity projects for the grid, detail pages and homepage. Only published Sanity records appear in the visual portfolio; incomplete records are omitted. The former Crescent Pearl and National Park Villas fallback records have been removed and will appear only if published in Sanity.
 
 Requires Node.js 22.12 or newer.
 
@@ -53,8 +53,8 @@ The latter two commands build a local Studio and extract its schema; they do not
 - Detail pages show the gallery in editorial order, optional captions/credits, scope, related services and confirmed project facts. Gallery photos can be opened at a larger size. CDN images respect the editor's crop; cover layouts preserve the focal point.
 - New project URLs are generated when requested; publishing does not require rebuilding the website.
 - The server caches queries for 60 seconds. After that interval, a visit triggers background refresh, so the first visitor can still receive the previous version. Refresh again after revalidation to see the update. This is not a guaranteed 60-second publication deadline.
-- Existing company-profile records retain their direct URLs for service links and bookmarks during migration. Sanity overrides a local record with the same slug. Local records do not join the CMS grid; if a matching Sanity record is unpublished, its older profile detail page remains accessible until that local record is removed from the code.
-- API failures are logged on the server and use the local fallback. A successful response containing only invalid records produces an empty portfolio; correct and publish those records in Studio.
+- The remaining company-profile records without photography retain their direct URLs for service links and bookmarks during migration. Sanity overrides a local record with the same slug. Local records do not join the CMS grid; if a matching Sanity record is unpublished, its older profile detail page remains accessible until that local record is removed from the code.
+- API failures are logged on the server and return an empty portfolio; hardcoded cards are never substituted. A successful response containing only invalid records produces an empty portfolio; correct and publish those records in Studio.
 
 ## Deploying
 
@@ -62,11 +62,11 @@ Add `SANITY_STUDIO_PROJECT_ID=x7trmz7f` and `SANITY_STUDIO_DATASET=production` i
 
 Deploy the updated website code after testing. No API token is needed for this public dataset. No webhook is required for the 60-second cache policy, and no webhook receiver has been added. A signed on-demand revalidation endpoint can be added later if faster updates are needed.
 
-Studio remains a separate application. Run `npx sanity deploy` when ready to publish the editor to a chosen Sanity-hosted address, then sign in there to edit projects. This is separate from deploying the Next.js website and does not publish project documents automatically. For a custom Studio host, authorize its exact origin in Sanity CORS with credentials for editor sign-in. Server-side website queries do not need a browser CORS entry.
+Studio is live at https://dunhill-contractors.sanity.studio/. Sign in using the email-and-password method for the Dunhill administrator account. Run `npx sanity deploy sanity-dist` to update the hosted editor; `sanity.cli.ts` records its deployment app ID. This is separate from deploying the Next.js website and does not publish project documents automatically. For a custom Studio host, authorize its exact origin in Sanity CORS with credentials for editor sign-in. Server-side website queries do not need a browser CORS entry.
 
 ## Validation
 
-Run `npm run test:sanity`, `npm run lint`, `npm run build` and `npm run studio:build`. Data tests cover draft exclusion, CMS authority and empty/error fallbacks, new slugs, filtering, featured selection, image crops and focal points. Real project photographs should be checked after the first Sanity content is published.
+Run `npm run test:sanity`, `npm run lint`, `npm run build` and `npm run studio:build`. Data tests cover draft exclusion, CMS authority, removed fallback records and empty/error states, new slugs, filtering, featured selection, image crops and focal points. Real project photographs should be checked after the first Sanity content is published.
 
 References: [Sanity image fields](https://www.sanity.io/docs/studio/image-type), [validation](https://www.sanity.io/docs/studio/validation), [Studio configuration](https://www.sanity.io/docs/studio/configuration).
 
