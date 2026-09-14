@@ -6,12 +6,20 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "studio": "sanity dev",
+    "studio:build": "sanity build sanity-dist",
+    "studio:schema": "sanity schema extract --path sanity-schema.json --force",
+    "test:sanity": "node --conditions=react-server --import tsx --test tests/sanity-projects.test.ts"
   },
   "dependencies": {
+    "@sanity/image-url": "^2.1.1",
     "next": "16.3.4",
     "react": "19.2.8",
-    "react-dom": "19.2.8"
+    "react-dom": "19.2.8",
+    "sanity": "^6.13.2",
+    "server-only": "^0.0.1",
+    "styled-components": "^6.5.3"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
@@ -21,6 +29,22 @@
     "eslint": "^9",
     "eslint-config-next": "16.3.4",
     "tailwindcss": "^4",
+    "tsx": "^4.23.13",
     "typescript": "^5"
+  },
+  "overrides": {
+    "@vercel/frameworks": {
+      "js-yaml": "^3.15.2",
+      "smol-toml": "^1.8.0"
+    },
+    "@module-federation/dts-plugin": {
+      "adm-zip": "^0.6.1"
+    },
+    "typeid-js": {
+      "uuid": "^11.1.1"
+    }
+  },
+  "engines": {
+    "node": ">=22.12.0"
   }
 }

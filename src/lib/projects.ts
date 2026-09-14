@@ -1,5 +1,6 @@
-export const categories = ["All projects", "Residential", "Villas & townhouses", "Commercial", "Industrial", "Hospitality", "Civil & infrastructure"] as const;
-export type Project = { slug: string; title: string; location: string; year: string; category: string; image?: string; description: string; client?: string; architect?: string; engineer?: string; source: string; service: string };
+export { categories } from "./project-categories";
+export type ProjectPhoto = { src: string; alt: string; width: number; height: number; position?: string; caption?: string; credit?: string };
+export type Project = { cover?: ProjectPhoto; gallery?: ProjectPhoto[]; featured?: boolean; scope?: string[]; status?: string; completionYear?: number; services?: string[]; slug: string; title: string; location: string; year: string; category: string; image?: string; description: string; client?: string; architect?: string; engineer?: string; source: string; service: string };
 export const projects: Project[] = [
   { slug:"crescent-pearl", title:"Crescent Pearl", location:"Westlands, Nairobi", year:"2025", category:"Residential", image:"crescent-pearl-b.jpeg", description:"A residential apartment development on Crescent Road in Westlands. Crescent Pearl is also home to Dunhill’s head office.", source:"2026 company profile, page 28", service:"building" },
   { slug:"national-park-villas", title:"National Park Villas", location:"Mlolongo", year:"2025", category:"Villas & townhouses", image:"national-park-villas.jpeg", description:"A villa development in Mlolongo, featured in Dunhill’s residential portfolio.", source:"2026 company profile, page 23", service:"building" },

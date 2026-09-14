@@ -45,3 +45,8 @@ next-env.d.ts
 /full-home-desktop.png
 /full-home-mobile.png
 /Dunhill profile 2026.pdf
+
+# Sanity Studio build and generated schema
+/sanity-dist/
+/.sanity/
+/sanity-schema.json

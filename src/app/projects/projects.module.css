@@ -76,3 +76,24 @@
 }
 @media(max-width:360px) { .heading h1 { font-size:65px; } .cardImage { height:300px; } .cardCaption h2 { font-size:22px; } }
 @media(prefers-reduced-motion:reduce) { .cardImage>img { transition:none; } }
+
+.description { white-space:pre-line; }
+.relatedServices { display:flex; flex-wrap:wrap; gap:16px 28px; margin-top:24px; }
+.relatedServices>a { font-size:13px; }
+.scope { margin-top:32px; }
+.scope h3 { font-size:20px; font-weight:500; }
+.scope ul { padding-left:20px; margin-top:16px; }
+.scope li { margin-block:10px; color:var(--muted); font-size:14px; }
+.gallery { padding-block:12px 56px; }
+.gallery h2 { font-size:42px; margin:18px 0 28px; }
+.galleryGrid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:32px 24px; align-items:start; }
+.galleryGrid figure { margin:0; min-width:0; }
+.galleryGrid a { display:block; background:var(--image-surface); }
+.galleryGrid img { display:block; width:100%; height:auto; }
+.galleryGrid figcaption { font-size:13px; color:var(--muted); margin-top:12px; }
+.galleryGrid figcaption span { display:block; margin-top:4px; font-size:11px; }
+@media(max-width:800px) { .galleryGrid { grid-template-columns:1fr; gap:24px; } .gallery { padding-bottom:36px; } }
+
+.cardCaption h2,.detailHero h1,.browse strong,.detailBody dd { overflow-wrap:anywhere; }
+.photoCaption { color:var(--muted); font-size:12px; margin-top:12px; }
+.photoCaption span { display:block; margin-top:4px; }

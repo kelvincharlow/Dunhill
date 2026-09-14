@@ -4,14 +4,16 @@ import { ArrowIcon } from "@/components/arrow-icon";
 
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import { portfolioProjects, portfolioState } from "@/lib/portfolio";
+import { portfolioState } from "@/lib/portfolio";
 import styles from "@/app/projects/projects.module.css";
 
-export function ProjectBrowseLinks({ slug, compact = false }: { slug: string; compact?: boolean }) {
+type BrowseProject = { slug: string; title: string; category: string };
+
+export function ProjectBrowseLinks({ slug, compact = false, projects }: { slug: string; compact?: boolean; projects: BrowseProject[] }) {
   const params = useSearchParams();
-  const state = portfolioState(params.get("category"));
+  const state = portfolioState(params.get("category"), projects);
   if (compact) return <Link className="text-link" href={state.href}><ArrowIcon direction="left" /> {state.suffix ? "Back to results" : "All projects"}</Link>;
-  const group = state.visible.some(project => project.slug === slug) ? state.visible : portfolioProjects;
+  const group = state.visible.some(project => project.slug === slug) ? state.visible : projects;
   const index = group.findIndex(project => project.slug === slug);
   const previous = group[index - 1];
   const next = group[index + 1];

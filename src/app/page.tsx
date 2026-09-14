@@ -3,6 +3,9 @@ import Link from "next/link";
 import Image from "next/image";
 import { SiteHeader } from "@/components/site-header";
 import { InnerFooter } from "@/components/inner-footer";
+import { getProjects } from "@/lib/sanity-projects";
+import { featuredProjects } from "@/lib/project-content";
+import { ProjectPhoto } from "@/components/project-photo";
 import { ProjectShowcase } from "@/components/project-showcase";
 import heroStyles from "./hero.module.css";
 import styles from "./home.module.css";
@@ -16,20 +19,24 @@ const services = [
   { title: "Metal & steel fabrication", copy: "Structural steelwork, metal doors, grills and frames.", href: "/services#fabrication", icon: "M3 4h18v3H3zM3 17h18v3H3zM9 7v10m6-10v10M4 11h3m10 2h3" },
 ];
 
-export default function Home() {
+export const revalidate = 60;
+
+export default async function Home() {
+  const featured = featuredProjects(await getProjects());
+  const heroProject = featured[0];
   return <>
     <a className="skip-link" href="#main">Skip to content</a>
     <SiteHeader />
     <main id="main" tabIndex={-1}>
       <section className={heroStyles.hero} id="home" aria-labelledby="hero-title">
         <figure className={heroStyles.visual}>
-          <Image src="/images/profile/crescent-pearl-b.jpeg" alt="Crescent Pearl in Westlands, Nairobi" fill preload sizes="100vw" />
-          <figcaption className={heroStyles.caption}>
-            <Link href="/projects/crescent-pearl" aria-label="View Crescent Pearl project">
-              <span className={heroStyles.projectInfo}><small>FEATURED PROJECT</small><strong>Crescent Pearl</strong><span>Westlands, Nairobi</span></span>
+          {heroProject ? <ProjectPhoto project={heroProject} preload sizes="100vw" /> : <Image src="/images/profile/industrial-01.jpeg" alt="Dunhill construction site" fill preload sizes="100vw" />}
+          {heroProject && <figcaption className={heroStyles.caption}>
+            <Link href={`/projects/${heroProject.slug}`} aria-label={`View ${heroProject.title} project`}>
+              <span className={heroStyles.projectInfo}><small>FEATURED PROJECT</small><strong>{heroProject.title}</strong><span>{heroProject.location}</span></span>
               <span className={heroStyles.projectArrow} aria-hidden="true"><ArrowIcon /></span>
             </Link>
-          </figcaption>
+          </figcaption>}
         </figure>
         <div className={heroStyles.heading}>
           <p className="eyebrow">Building Kenya since 1983</p>
@@ -56,7 +63,7 @@ export default function Home() {
         <div className="wrap">
           <div className="section-label"><span>01 / SELECTED WORK</span><span>THE DUNHILL PORTFOLIO</span></div>
           <div className={styles.sectionHeading}><h2 id="projects-title">See what<br /><em>we build.</em></h2><Link className="text-link" href="/projects">View all projects <span aria-hidden="true"><ArrowIcon /></span></Link></div>
-          <ProjectShowcase />
+          <ProjectShowcase projects={featured} />
         </div>
       </section>
 
