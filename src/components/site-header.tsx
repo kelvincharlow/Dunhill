@@ -1,6 +1,8 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
+
+import Link from "next/link";
 
 import { navigation, navigationHref } from "@/lib/navigation";
 
@@ -12,32 +14,27 @@ export function SiteHeader({ onAbout = false, onServices = false, onProjects = f
   const innerPage = onAbout || onServices || onProjects || onPlant || onCompliance || onContact;
   const pageId = onContact ? "contact" : onCompliance ? "compliance" : onPlant ? "plant-workshops" : onProjects ? "projects" : onServices ? "services" : "about";
   const dialog = useRef<HTMLDialogElement>(null);
-  const [active, setActive] = useState("home");
   useEffect(() => {
-    const observer = new IntersectionObserver(entries => {
-      for (const entry of entries) if (entry.isIntersecting) setActive(entry.target.id);
-    }, { rootMargin: "-15% 0px -65% 0px" });
-    navigation.forEach(([, id]) => { const node = document.getElementById(id); if (node) observer.observe(node); });
     const media = matchMedia("(min-width: 1200px)");
     const close = () => { if (media.matches) dialog.current?.close(); };
     media.addEventListener("change", close);
-    return () => { observer.disconnect(); media.removeEventListener("change", close); };
+    return () => { media.removeEventListener("change", close); };
   }, []);
   const close = () => dialog.current?.close();
   return <header className="site-header">
-    <div className="header-inner">
-      <a href={navigationHref("home", innerPage)} aria-label="Dunhill home"><Brand /></a>
+    <div className="header-inner wrap">
+      <Link href={navigationHref("home", innerPage)} aria-label="Dunhill home"><Brand /></Link>
       <nav className="desktop-nav" aria-label="Main navigation">{navigation.map(([label, id]) =>
-        <a key={id} href={navigationHref(id, innerPage)} aria-current={innerPage ? (id === pageId ? "page" : undefined) : (active === id ? "location" : undefined)}>{label}</a>
+        <Link key={id} href={navigationHref(id, innerPage)} aria-current={id === (innerPage ? pageId : "home") ? "page" : undefined}>{label}</Link>
       )}</nav>
-      <a href={onContact ? "#enquiry" : "/contact"} className="header-cta" aria-current={onContact ? "page" : undefined}>Start a project <span aria-hidden="true">↗</span></a>
+      <Link href={onContact ? "#enquiry" : "/contact"} className="header-cta" aria-current={onContact ? "page" : undefined}><span className="header-cta-label">Start a project</span><span className="header-cta-short">Contact</span><span className="header-cta-arrow" aria-hidden="true">↗</span></Link>
       <button type="button" className="menu-button" aria-label="Open navigation" aria-haspopup="dialog" onClick={() => dialog.current?.showModal()}><span /><span /></button>
     </div>
     <dialog ref={dialog} className="mobile-menu" aria-label="Main navigation">
       <div className="menu-top"><Brand /><button className="close-button" onClick={close} aria-label="Close navigation">×</button></div>
       <p className="eyebrow">Explore Dunhill</p>
-      <nav>{navigation.map(([label, id], index) => <a key={id} href={navigationHref(id, innerPage)} aria-current={innerPage && id === pageId ? "page" : undefined} onClick={close}><small>0{index + 1}</small>{label}<span aria-hidden="true">↗</span></a>)}</nav>
-      <a className="button" href={onContact ? "#enquiry" : "/contact"} onClick={close}>Start a project <span aria-hidden="true">↗</span></a>
+      <nav>{navigation.map(([label, id], index) => <Link key={id} href={navigationHref(id, innerPage)} aria-current={id === (innerPage ? pageId : "home") ? "page" : undefined} onClick={close}><small>0{index + 1}</small>{label}<span aria-hidden="true">↗</span></Link>)}</nav>
+      <Link className="button" href={onContact ? "#enquiry" : "/contact"} aria-current={onContact ? "page" : undefined} onClick={close}>{onContact ? "Go to your enquiry" : "Start a project"} <span aria-hidden="true">↗</span></Link>
       <p className="menu-location">Westlands, Nairobi · Building Kenya since 1983</p>
     </dialog>
   </header>;

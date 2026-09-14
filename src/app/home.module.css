@@ -1,0 +1,100 @@
+.section { padding-block:80px; }
+.trust { display:grid; grid-template-columns:repeat(3,1fr) 1.2fr; align-items:center; gap:26px; padding-block:24px 32px; }
+.trust>div { display:flex; flex-direction:column; gap:5px; border-right:1px solid var(--line); }
+.trust strong { font-size:32px; line-height:1.2; font-weight:500; letter-spacing:-.05em; }
+.trust strong>span { font-size:18px; vertical-align:top; }
+.trust>div>span { font-size:11px; color:var(--muted); }
+.trustLink { display:block; min-height:44px; padding-block:4px; font-size:10px; line-height:1.8; color:var(--muted); text-decoration:underline; text-underline-offset:3px; }
+.trustLink:hover { color:var(--ink); }
+.projects { background:#e9eee5; padding-block:64px; }
+.sectionHeading { display:flex; justify-content:space-between; align-items:flex-end; gap:24px; margin-bottom:32px; }
+.sectionHeading h2 { font-size:clamp(36px,4vw,58px); }
+.sectionHeading>a { flex-shrink:0; }
+.projectGrid { display:grid; grid-template-columns:1fr 1fr; gap:28px; }
+.projectCard { display:block; min-width:0; }
+.projectPhoto { position:relative; height:clamp(300px,29vw,420px); overflow:hidden; background:#ccd6c6; }
+.projectPhoto img { object-fit:cover; object-position:center; transition:transform .4s; }
+.projectCard:hover img { transform:scale(1.025); }
+.projectPhoto>span { position:absolute; left:18px; top:18px; background:var(--paper); padding:9px 12px; font-size:10px; }
+.projectCaption { display:flex; align-items:center; justify-content:space-between; gap:14px; padding-top:20px; }
+.projectCaption h3 { font-size:25px; font-weight:500; letter-spacing:-.04em; }
+.projectCaption p { font-size:12px; margin-top:5px; }
+.projectCaption>span { width:44px; height:44px; display:grid; place-items:center; border:1px solid #aebda7; border-radius:50%; font-size:23px; flex-shrink:0; transition:background .2s; }
+.projectCard:hover .projectCaption>span { background:var(--paper); }
+.services { display:grid; grid-template-columns:repeat(3,1fr); border-top:1px solid var(--line); border-left:1px solid var(--line); }
+.serviceCard { position:relative; min-width:0; padding:28px; border-right:1px solid var(--line); border-bottom:1px solid var(--line); transition:background .2s; }
+.serviceCard:hover { background:#e9eee5; }
+.serviceCard>svg { width:32px; height:32px; color:#627953; margin-bottom:25px; }
+.serviceCard h3 { max-width:230px; font-size:19px; font-weight:550; letter-spacing:-.03em; line-height:1.35; text-wrap:initial; }
+.serviceCard p { font-size:12px; margin-top:10px; max-width:260px; }
+.cardArrow { position:absolute; top:26px; right:26px; font-size:22px; color:var(--muted); }
+.company { display:grid; grid-template-columns:1fr 1fr; max-width:1600px; margin:auto; background:var(--ink); color:var(--paper); }
+.companyPhoto { position:relative; min-height:490px; }
+.companyPhoto img { object-fit:cover; }
+.companyPhoto>span { position:absolute; left:24px; bottom:24px; padding:10px 14px; background:var(--ink); font-size:9px; letter-spacing:.12em; }
+.companyCopy { align-self:center; padding:48px clamp(28px,4vw,64px); }
+.companyCopy>p { color:#c2cdc7; font-size:13px; }
+.companyCopy>.eyebrow { font-size:9px; color:#c1d3ac; }
+.companyCopy h2 { font-size:clamp(33px,3.1vw,48px); margin-block:22px; }
+.companyCopy em { color:#c1d3ac; }
+.values { list-style:none; padding:0; display:flex; gap:22px; flex-wrap:wrap; margin:24px 0; }
+.values li { font-size:11px; }
+.values li::before { content:"+"; margin-right:8px; color:#c1d3ac; }
+.companyLinks { display:flex; flex-direction:column; align-items:flex-start; gap:8px; }
+.companyLinks>a { border-color:#789085; font-size:12px; }
+.companyLinks>a:hover { color:#c1d3ac; }
+.clients { text-align:center; padding-block:64px; }
+.clients>.eyebrow { justify-content:center; font-size:9px; }
+.clients h2 { font-size:clamp(28px,3vw,40px); margin-top:16px; }
+.clientNames { list-style:none; margin:32px 0 0; padding:0; display:grid; grid-template-columns:repeat(5,1fr); gap:24px; align-items:center; }
+.clientNames li { font-size:25px; font-weight:700; letter-spacing:-.05em; }
+.clientNames li:nth-child(2),.clientNames li:nth-child(5) { font-family:var(--serif); font-size:34px; font-style:italic; }
+.clientNames span { display:block; font-family:var(--sans); font-size:8px; font-style:normal; letter-spacing:.2em; margin-top:3px; }
+.contact { display:flex; align-items:center; justify-content:space-between; gap:32px; padding:48px; margin-bottom:64px; background:#dce6d2; }
+.contact h2 { font-size:clamp(36px,4.5vw,64px); margin-block:20px; }
+.contact p:not(.eyebrow) { font-size:13px; }
+.contactActions { display:flex; flex-direction:column; align-items:center; gap:12px; flex-shrink:0; }
+@media(max-width:1199px) {
+  .trust { grid-template-columns:repeat(3,1fr); }
+  .trust>div:last-of-type { border:0; }
+  .trustLink { grid-column:1/-1; }
+  .serviceCard { padding:24px; }
+}
+@media(max-width:800px) {
+  .section,.projects { padding-block:48px; }
+  .trust { gap:18px 12px; padding-block:28px; }
+  .trust strong { font-size:25px; }
+  .trust>div>span { font-size:10px; max-width:100px; }
+  .trustLink { font-size:10px; }
+  .sectionHeading { align-items:flex-start; flex-direction:column; gap:14px; margin-bottom:24px; }
+  .projectGrid { grid-template-columns:1fr; gap:28px; }
+  .projectPhoto { height:clamp(280px,70vw,420px); }
+  .projectCaption { padding-top:14px; }
+  .projectCaption h3 { font-size:24px; }
+  .services { grid-template-columns:repeat(2,1fr); }
+  .serviceCard { padding:22px 18px; }
+  .serviceCard h3 { font-size:17px; }
+  .serviceCard p { font-size:12px; }
+  .cardArrow { top:20px; right:18px; }
+  .company { grid-template-columns:1fr; }
+  .companyPhoto { min-height:320px; }
+  .companyCopy { padding:36px 24px; }
+  .companyCopy h2 { font-size:clamp(32px,6vw,45px); }
+  .clients { padding-block:48px; }
+  .clientNames { grid-template-columns:repeat(6,1fr); gap:24px 12px; }
+  .clientNames li { grid-column:span 2; font-size:22px; }
+  .clientNames li:nth-child(4) { grid-column:2/span 2; }
+  .clientNames li:nth-child(5) { grid-column:4/span 2; }
+  .clientNames span { font-size:7px; }
+  .contact { flex-direction:column; align-items:flex-start; padding:30px 24px; margin-bottom:48px; gap:24px; }
+  .contactActions { align-items:flex-start; }
+}
+@media(max-width:360px) {
+  .trust strong { font-size:22px; }
+  .services { grid-template-columns:1fr; }
+  .serviceCard { padding:22px; }
+  .serviceCard>svg { margin-bottom:16px; }
+  .clientNames li { font-size:19px; }
+  .contact h2 { font-size:33px; }
+}
+@media(prefers-reduced-motion:reduce) { .projectPhoto img,.projectCaption>span,.serviceCard { transition:none; } }

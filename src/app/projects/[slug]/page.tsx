@@ -1,15 +1,33 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { projects } from "@/lib/projects";
+import { services } from "@/lib/services";
 import { SiteHeader } from "@/components/site-header";
 import { InnerFooter } from "@/components/inner-footer";
+import { ProjectBrowseLinks } from "@/components/project-browse-links";
 import styles from "../projects.module.css";
-export function generateStaticParams() { return projects.map(p=>({slug:p.slug})); }
-export async function generateMetadata({params}:{params:Promise<{slug:string}>}):Promise<Metadata> { const {slug}=await params;const p=projects.find(p=>p.slug===slug);return {title:p ? `${p.title} | Dunhill Projects` : "Project not found | Dunhill",description:p?.description}; }
+
+export function generateStaticParams() { return projects.map(project => ({ slug:project.slug })); }
+export async function generateMetadata({params}:{params:Promise<{slug:string}>}):Promise<Metadata> { const {slug}=await params; const project=projects.find(item=>item.slug===slug); return {title:project ? `${project.title} | Dunhill Projects` : "Project not found | Dunhill",description:project?.description}; }
 export default async function Project({params}:{params:Promise<{slug:string}>}) {
-  const {slug}=await params;const project=projects.find(p=>p.slug===slug);if(!project)notFound();
-  const next=projects[(projects.indexOf(project)+1)%projects.length];
-  return <><a className="skip-link" href="#main">Skip to content</a><SiteHeader onProjects /><main id="main" className="wrap"><section className={styles.detailHero}><Link className="text-link" href="/projects">← All projects</Link><p className="eyebrow">{project.category}</p><h1>{project.title}</h1><p>{project.location} · {project.year}</p>{project.image ? <div className={styles.detailPhoto}><Image src={`/images/profile/${project.image}`} alt={project.title} fill preload sizes="90vw" /></div> : <div className={styles.archiveNotice}><span className="eyebrow">From the project archive</span><p>Project photography is being prepared. Explore the documented project details below.</p></div>}</section><section className={`section ${styles.detailBody}`}><div><p className="eyebrow">Project overview</p><h2>A part of<br /><em>our building story.</em></h2><p>{project.description}</p><Link className="text-link" href={`/services#${project.service}`}>Explore the related service <span aria-hidden="true">↗</span></Link></div><div><dl>{[["Location",project.location],["Category",project.category],["Profile year",project.year],["Client",project.client],["Architect",project.architect],["Consulting engineer",project.engineer]].filter(([,value])=>value).map(([label,value])=><div key={label}><dt>{label}</dt><dd>{value}</dd></div>)}</dl><p className={styles.note}>Source: {project.source}. Years are profile records, not verified completion dates.</p></div></section><section className={styles.contact} id="contact"><p className="eyebrow">Build on this experience</p><div><h2>Planning<br /><em>something similar?</em></h2><a className="button" href={`mailto:info@dunhillbcon.com?subject=${encodeURIComponent(`Project enquiry: ${project.title}`)}`}>Discuss your project <span aria-hidden="true">↗</span></a></div><Link className="text-link" href={`/projects/${next.slug}`}>Next project: {next.title} <span aria-hidden="true">↗</span></Link></section></main><InnerFooter /></>;
+  const {slug}=await params;
+  const project=projects.find(item=>item.slug===slug);
+  if(!project)notFound();
+  const service = services.find(item => item.id === project.service);
+  return <><a className="skip-link" href="#main">Skip to content</a><SiteHeader onProjects /><main id="main" tabIndex={-1} className="wrap">
+    <section className={styles.detailHero} aria-labelledby="project-title">
+      <Suspense fallback={<Link className="text-link" href="/projects">← All projects</Link>}><ProjectBrowseLinks slug={slug} compact /></Suspense>
+      <p className="eyebrow">{project.category}</p><h1 id="project-title">{project.title}</h1><p className={styles.location}>{project.location}</p>
+      {project.image && <div className={styles.detailPhoto}><Image src={`/images/profile/${project.image}`} alt={`${project.title}, ${project.location}`} fill preload sizes="(max-width: 800px) calc(100vw - 44px), (max-width: 1472px) calc(100vw - 112px), 1360px" /></div>}
+    </section>
+    <section className={styles.detailBody} aria-labelledby="overview-title">
+      <div><p className="eyebrow">PROJECT OVERVIEW</p><h2 id="overview-title">The work.</h2><p className={styles.description}>{project.description}</p><Link className="text-link" href={`/services#${project.service}`}>{service?.title || "Explore the related service"} <span aria-hidden="true">↗</span></Link>{!project.image && <p className={styles.archiveNote}>A project record from our company profile. Photography is not currently available for this entry.</p>}</div>
+      <div><h2 className={styles.factsTitle}>Project at a glance</h2><dl>{[["Location",project.location],["Sector",project.category],["Profile year",project.year === "To be confirmed" ? "Not listed" : project.year],["Client",project.client],["Architect",project.architect],["Consulting engineer",project.engineer]].filter(([,value])=>value).map(([label,value])=><div key={label}><dt>{label}</dt><dd>{value}</dd></div>)}</dl><p className={styles.note}>Source: {project.source}. Years are profile records, not verified completion dates.</p></div>
+    </section>
+    <section className={styles.contact} id="contact"><div><p className="eyebrow">PLANNING SOMETHING SIMILAR?</p><h2>Let’s talk<br /><em>about yours.</em></h2></div><Link className="button" href={`/contact?service=${encodeURIComponent(service?.title || "General enquiry")}#enquiry`}>Discuss your project <span aria-hidden="true">↗</span></Link></section>
+    <Suspense fallback={<Link className="text-link" href="/projects">View all projects ↗</Link>}><ProjectBrowseLinks slug={slug} /></Suspense>
+  </main><InnerFooter /></>;
 }

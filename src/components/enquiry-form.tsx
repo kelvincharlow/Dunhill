@@ -3,7 +3,7 @@ import { useState, type FormEvent } from "react";
 import { projectValues, serviceInterests, validateEnquiry } from "@/lib/enquiry";
 import styles from "@/app/contact/contact.module.css";
 
-export function EnquiryForm({ deliveryEnabled }: {deliveryEnabled:boolean}) {
+export function EnquiryForm({ deliveryEnabled, initialService = "", initialDescription = "" }: {deliveryEnabled:boolean; initialService?:string; initialDescription?:string}) {
   const [busy,setBusy]=useState(false);
   const [status,setStatus]=useState("");
   const [draft,setDraft]=useState("");
@@ -29,25 +29,27 @@ export function EnquiryForm({ deliveryEnabled }: {deliveryEnabled:boolean}) {
     }catch(error){setStatus(error instanceof Error && error.name!=="TimeoutError" ? error.message : "Delivery could not be confirmed. Your details are still here; you can use the email draft below.");}
     finally{setBusy(false);}
   }
-  return <form className={styles.form} onSubmit={submit} aria-label="Contact Dunhill" aria-busy={busy}>
-    <p className={styles.formNote}>Fields marked * are required. Company, phone and project details can be left blank for a general enquiry.</p>
-    {!deliveryEnabled && <p className={styles.notice}>Online submission is being connected. For now, this form prepares an email draft for you to send.</p>}
-    <fieldset disabled={busy}><legend>Your details</legend><div className={styles.fields}>
+  function clearPreparedDraft() {
+    if (draft || status || accepted) { setDraft(""); setStatus(""); setAccepted(false); }
+  }
+  return <form className={styles.form} onSubmit={submit} onChange={clearPreparedDraft} aria-label="Contact Dunhill" aria-busy={busy}>
+    <p className={styles.formNote}>Fields marked * are required.</p>
+    {!deliveryEnabled && <p className={styles.notice}>This form prepares an email draft. You’ll review and send it from your email app.</p>}
+    <fieldset disabled={busy}><legend className="sr-only">Your enquiry details</legend><div className={styles.fields}>
       <label>Name *<input name="name" autoComplete="name" required maxLength={100} /></label>
-      <label>Company <span>(optional)</span><input name="company" autoComplete="organization" maxLength={160} /></label>
       <label>Email *<input name="email" type="email" autoComplete="email" required maxLength={254} /></label>
-      <label>Phone <span>(optional)</span><input name="phone" type="tel" autoComplete="tel" maxLength={40} /></label>
+      <label className={styles.full}>What can we help with? *<select key={initialService} name="service" defaultValue={initialService} required><option value="" disabled>Select an interest</option>{serviceInterests.map(s=><option key={s}>{s}</option>)}</select></label>
+      <label className={styles.full}>Your message *<textarea key={initialDescription} defaultValue={initialDescription} name="description" rows={initialDescription ? 9 : 5} required minLength={10} maxLength={5000} aria-describedby="message-help" placeholder="Tell us what you have in mind, or ask us a question." /><small id="message-help">At least 10 characters. Include your reference or deadline if relevant.</small></label>
     </div></fieldset>
-    <fieldset disabled={busy}><legend>How can we help?</legend><div className={styles.fields}>
-      <label className={styles.full}>Service or enquiry interest *<select name="service" defaultValue="" required><option value="" disabled>Select an interest</option>{serviceInterests.map(s=><option key={s}>{s}</option>)}</select></label>
-      <label>Project location <span>(optional)</span><input name="location" maxLength={160} placeholder="Town, county or site location" /></label>
-      <label>Estimated project value <span>(optional)</span><select name="value" defaultValue="Not specified">{projectValues.map(v=><option key={v}>{v}</option>)}</select></label>
-      <label className={styles.full}>Project description or message *<textarea name="description" rows={6} required minLength={10} maxLength={5000} placeholder="Tell us about your project, requirements, timeline or question." /><small>10–5,000 characters. Please don’t include sensitive documents or financial account details.</small></label>
-    </div></fieldset>
+    <details className={styles.optional}><summary>Add contact or project details <span>(optional)</span><i aria-hidden="true">+</i></summary><fieldset disabled={busy}><legend className="sr-only">Optional information</legend><div className={styles.fields}>
+      <label>Company<input name="company" autoComplete="organization" maxLength={160} /></label>
+      <label>Phone<input name="phone" type="tel" autoComplete="tel" maxLength={40} /></label>
+      <label>Project location<input name="location" maxLength={160} placeholder="Town, county or site" /></label>
+      <label>Estimated project value<select name="value" defaultValue="Not specified">{projectValues.map(v=><option key={v}>{v}</option>)}</select></label>
+    </div></fieldset></details>
     <div className={styles.trap} aria-hidden="true"><label>Leave this field empty<input name="website" tabIndex={-1} autoComplete="off" /></label></div>
     <label className={styles.consent}><input name="consent" type="checkbox" required disabled={busy} /><span>I agree that Dunhill may use these details to respond to my enquiry. *</span></label>
-    <p className={styles.formNote}>Please provide only the information needed for your enquiry. An email draft stays in your email app until you send it.</p>
-    <button className="button" type="submit" disabled={busy}>{busy ? "Submitting…" : deliveryEnabled ? "Submit enquiry" : "Prepare email enquiry"}<span aria-hidden="true">↗</span></button>
+    <button className="button" type="submit" disabled={busy}>{busy ? "Submitting…" : deliveryEnabled ? "Submit enquiry" : "Prepare email draft"}<span aria-hidden="true">↗</span></button>
     <div role="status" aria-live="polite" aria-atomic="true">{status && <p className={styles.feedback}>{status}</p>}</div>
     {draft && !accepted && <a className="text-link" href={draft}>Open email draft <span aria-hidden="true">↗</span></a>}
     <noscript><p>Please enable JavaScript to use the form, or email info@dunhillbcon.com directly.</p></noscript>

@@ -1,11 +1,18 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import { SiteHeader } from "@/components/site-header";
 import { InnerFooter } from "@/components/inner-footer";
 import { ProjectGrid } from "@/components/project-grid";
+import { portfolioState } from "@/lib/portfolio";
 import styles from "./projects.module.css";
+
 export const metadata: Metadata = { title:"Projects | Dunhill Building Contractors", description:"Explore Dunhill’s residential, commercial, industrial, hospitality and civil infrastructure project portfolio." };
-export default function Projects() {
-  return <><a className="skip-link" href="#main">Skip to content</a><SiteHeader onProjects /><main id="main"><section className={`wrap ${styles.hero}`}><p className="eyebrow">Our projects / A portfolio of experience</p><div className={styles.heading}><h1>Built to be part<br /><em>of something bigger.</em></h1><p>Homes, workplaces and the infrastructure between them. Explore the projects that tell the Dunhill story.</p></div><Link className={styles.feature} href="/projects/crescent-pearl"><Image src="/images/profile/crescent-pearl-b.jpeg" alt="Crescent Pearl apartment building in Westlands" fill preload sizes="90vw" /><span className={styles.featureLabel}>FEATURED PROJECT / RESIDENTIAL</span><div><span><strong>Crescent Pearl</strong><small>Westlands, Nairobi · 2025</small></span><span className={styles.featureLink}>Explore project ↗</span></div></Link></section><section className="wrap section" aria-labelledby="portfolio-title"><div className="section-label"><span>01 / THE PORTFOLIO</span><span>DIFFERENT SCALES. SHARED COMMITMENT.</span></div><h2 id="portfolio-title">Discover <em>our work.</em></h2><ProjectGrid /><p className={styles.note}>Years are as recorded in the company profile, not confirmed completion dates. Additional approved project photography will be added as it becomes available.</p></section><section className={`wrap ${styles.contact}`} id="contact"><p className="eyebrow">Your project could be the next chapter</p><div><h2>Something<br /><em>in mind?</em></h2><a className="button" href="mailto:info@dunhillbcon.com?subject=New%20project%20enquiry">Let’s talk about your project <span aria-hidden="true">↗</span></a></div></section></main><InnerFooter /></>;
+export default async function Projects({ searchParams }: { searchParams: Promise<{ category?: string | string[] }> }) {
+  const params = await searchParams;
+  const state = portfolioState(typeof params.category === "string" ? params.category : undefined);
+  return <><a className="skip-link" href="#main">Skip to content</a><SiteHeader onProjects /><main id="main" tabIndex={-1}>
+    <section className={`wrap ${styles.hero}`} aria-labelledby="projects-title"><p className="eyebrow">DUNHILL / THE PORTFOLIO</p><div className={styles.heading}><h1 id="projects-title">Our work<span>.</span></h1><p>Places to live. Spaces to work.<br />Infrastructure that connects them.</p></div></section>
+    <section className={`wrap ${styles.portfolio}`} aria-label="Browse the portfolio"><ProjectGrid category={state.category} /></section>
+    <section className={`wrap ${styles.contact}`} id="contact"><div><p className="eyebrow">BUILD ON THIS EXPERIENCE</p><h2>Have something<br /><em>in mind?</em></h2><p>Tell us about the project you want to bring to life.</p></div><Link className="button" href="/contact#enquiry">Let’s talk about your project <span aria-hidden="true">↗</span></Link></section>
+  </main><InnerFooter /></>;
 }
