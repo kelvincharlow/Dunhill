@@ -27,13 +27,21 @@ export default function About() {
     <a className="skip-link" href="#main">Skip to content</a>
     <SiteHeader onAbout />
     <main id="main" tabIndex={-1}>
-      <section className={styles.hero} aria-labelledby="about-title">
-        <Image src="/images/profile/industrial-01.jpeg" alt="Steel columns and lifting equipment on a Dunhill construction site" fill preload sizes="100vw" />
-        <div className={`wrap ${styles.heroInner}`}>
-          <p className={styles.heroLabel}>DUNHILL / THE COMPANY BEHIND THE WORK</p>
-          <h1 id="about-title">More than<br />what we build.</h1>
-          <div className={styles.heroBottom}><a href="#history">Get to know Dunhill <span aria-hidden="true"><ArrowIcon direction="down" /></span></a><p>Kenyan roots. Skilled hands.<br />A story that began in 1983.</p></div>
+      <section className={`wrap ${styles.hero}`} aria-labelledby="about-title">
+        <div className={styles.heroIntro}>
+          <p className="eyebrow">DUNHILL / THE COMPANY</p>
+          <h1 id="about-title">More than<br /><em>what we build.</em></h1>
+          <p className={styles.heroSummary}>Kenyan roots. Skilled hands.<br />A story that began in 1983.</p>
+          <nav className={styles.heroLinks} aria-label="Explore the company">
+            <a href="#history">Our story <ArrowIcon direction="down" /></a>
+            <a href="#values">Our principles <ArrowIcon direction="down" /></a>
+            <a href="#team">Our people <ArrowIcon direction="down" /></a>
+          </nav>
         </div>
+        <figure className={styles.heroPhoto}>
+          <div><Image src="/images/profile/industrial-01.jpeg" alt="Steel columns and lifting equipment on a Dunhill construction site" fill preload sizes="(max-width: 800px) calc(100vw - 44px), (max-width: 1472px) 43vw, 630px" /></div>
+          <figcaption><span>ON SITE, HANDS ON.</span><span>DUNHILL BUILDING CONTRACTORS</span></figcaption>
+        </figure>
       </section>
 
       <section className={`wrap ${styles.story}`} id="history" aria-labelledby="history-title">
