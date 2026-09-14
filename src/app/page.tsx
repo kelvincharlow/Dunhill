@@ -5,7 +5,7 @@ import { SiteHeader } from "@/components/site-header";
 import { InnerFooter } from "@/components/inner-footer";
 import { getProjects } from "@/lib/sanity-projects";
 import { featuredProjects } from "@/lib/project-content";
-import { ProjectPhoto } from "@/components/project-photo";
+import { HeroSlideshow, type HeroSlide } from "@/components/hero-slideshow";
 import { ProjectShowcase } from "@/components/project-showcase";
 import heroStyles from "./hero.module.css";
 import styles from "./home.module.css";
@@ -22,22 +22,16 @@ const services = [
 export const revalidate = 60;
 
 export default async function Home() {
-  const featured = featuredProjects(await getProjects());
-  const heroProject = featured[0];
+  const projects = await getProjects();
+  const featured = featuredProjects(projects);
+  // Keep the low-resolution Darakasi cover in the portfolio, outside the full-width hero.
+  const slides: HeroSlide[] = projects.flatMap(({ slug, title, location, cover }) => cover && slug !== "sands-of-darakasi" ? [{ slug, title, location, cover }] : []);
   return <>
     <a className="skip-link" href="#main">Skip to content</a>
     <SiteHeader />
     <main id="main" tabIndex={-1}>
       <section className={heroStyles.hero} id="home" aria-labelledby="hero-title">
-        <figure className={heroStyles.visual}>
-          {heroProject ? <ProjectPhoto project={heroProject} preload sizes="100vw" /> : <Image src="/images/profile/industrial-01.jpeg" alt="Dunhill construction site" fill preload sizes="100vw" />}
-          {heroProject && <figcaption className={heroStyles.caption}>
-            <Link href={`/projects/${heroProject.slug}`} aria-label={`View ${heroProject.title} project`}>
-              <span className={heroStyles.projectInfo}><small>FEATURED PROJECT</small><strong>{heroProject.title}</strong><span>{heroProject.location}</span></span>
-              <span className={heroStyles.projectArrow} aria-hidden="true"><ArrowIcon /></span>
-            </Link>
-          </figcaption>}
-        </figure>
+        <HeroSlideshow key={slides.map(slide => slide.slug).join("|")} slides={slides} />
         <div className={heroStyles.heading}>
           <p className="eyebrow">Building Kenya since 1983</p>
           <h1 id="hero-title">Building excellence.</h1>

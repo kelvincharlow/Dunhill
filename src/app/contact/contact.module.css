@@ -16,7 +16,7 @@
 .form fieldset { border:0; padding:0; margin:22px 0; min-width:0; }
 .fields { display:grid; grid-template-columns:1fr 1fr; gap:22px 18px; }
 .fields label { font-size:12px; font-weight:600; min-width:0; }
-.fields input,.fields select,.fields textarea { display:block; width:100%; background:var(--paper); color:var(--ink); font:inherit; font-weight:400; font-size:16px; border:1px solid var(--control-line, #abb9a4); border-radius:0; min-height:49px; padding:12px; margin-top:9px; }
+.fields input,.fields select,.fields textarea { display:block; width:100%; background:var(--paper); color:var(--ink); font:inherit; font-weight:400; font-size:16px; border:1px solid var(--control-line, #abb9a4); border-radius:12px; min-height:49px; padding:12px; margin-top:9px; }
 .fields textarea { resize:vertical; }
 .fields input:focus-visible,.fields select:focus-visible,.fields textarea:focus-visible,.consent input:focus-visible { outline:3px solid var(--blue); outline-offset:3px; }
 .fields small { display:block; font-size:10px; font-weight:400; color:var(--muted); line-height:1.65; margin-top:8px; }

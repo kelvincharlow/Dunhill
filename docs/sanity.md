@@ -48,7 +48,8 @@ The latter two commands build a local Studio and extract its schema; they do not
 ## Website behaviour
 
 - Projects sort by display order, then name. Duplicate slugs appear only once; keep every slug unique.
-- The homepage shows up to two featured projects in this order; the first supplies the hero photograph and link. If none are marked featured, it uses the first two photographed projects.
+- The hero slideshow includes published, valid project covers in display order, excluding `sands-of-darakasi` because its photograph is too blurry at hero size. That project remains in the portfolio. It advances every six seconds and supports previous/next, swipe, keyboard arrows and pause/play. Hovering pauses it; focusing controls or navigating manually stops automatic rotation. Reduced-motion preferences disable autoplay and transitions. The selected-work section below still shows up to two featured projects; if none are marked featured, it uses the first two photographed projects.
+- Local development bypasses the query and HMR caches: reload the page after publishing to see new content. Production retains its 60-second revalidation policy.
 - The grid shows only the cover photo and name, retaining category filters and the category when returning from a detail page.
 - Detail pages show the gallery in editorial order, optional captions/credits, scope, related services and confirmed project facts. Gallery photos can be opened at a larger size. CDN images respect the editor's crop; cover layouts preserve the focal point.
 - New project URLs are generated when requested; publishing does not require rebuilding the website.

@@ -13,7 +13,7 @@
 .requestLayout { display:grid; grid-template-columns:1.4fr 1fr; gap:clamp(36px,6vw,80px); align-items:start; }
 .registerHeading { display:flex; align-items:center; justify-content:space-between; gap:20px; margin-bottom:28px; }
 .registerHeading h2 { font-size:26px; letter-spacing:-.04em; }
-.registerHeading button { border:0; border-bottom:1px solid var(--ink); background:transparent; color:var(--ink); font-size:11px; min-height:44px; flex-shrink:0; padding:8px 0; }
+.registerHeading button { border:1px solid var(--control-line, #abb9a4); border-radius:999px; background:transparent; color:var(--ink); font-size:11px; min-height:44px; flex-shrink:0; padding:8px 14px; }
 .groups fieldset { border:0; min-width:0; padding:0; margin:0 0 30px; }
 .groups fieldset:last-child { margin-bottom:0; }
 .groups legend { display:flex; align-items:center; gap:14px; padding:0; font-size:22px; font-weight:500; letter-spacing:-.03em; }

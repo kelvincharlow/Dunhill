@@ -17,7 +17,7 @@ export const getProjects = cache(async (): Promise<Project[]> => {
   url.searchParams.set("query", projectsQuery);
   url.searchParams.set("perspective", "published");
   try {
-    const response = await fetch(url, { next: { revalidate: 60, tags: ["projects"] }, signal: AbortSignal.timeout(10000) });
+    const response = await fetch(url, { ...(process.env.NODE_ENV === "development" ? { cache: "no-store" as const } : { next: { revalidate: 60, tags: ["projects"] } }), signal: AbortSignal.timeout(10000) });
     if (!response.ok) throw new Error(`Sanity returned HTTP ${response.status}`);
     const { result } = await response.json();
     if (!Array.isArray(result)) throw new Error("Unexpected Sanity response");
