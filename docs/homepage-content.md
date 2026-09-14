@@ -72,7 +72,7 @@ The email-draft mode explains that visitors must review and send from their emai
 - Projects without confirmed photography are excluded from the visual listing. PMS warehousing has no year in the extracted record. Commercial classification for this warehousing entry is an editorial grouping, to be approved.
 - Services uses documented examples for building, civil and industrial work. Refurbishment, joinery and fabrication request relevant examples instead of inventing project associations.
 
-- Replace the interim geometric mark with the official logo.
+- The supplied logo.png replaces the interim mark. Navbar and footer show the DBC emblem through a CSS viewport beside a compact typeset company name; Compliance shows the full horizontal PNG on white. The original artwork is preserved.
 - Replace extracted photographs with original, approved files.
 - Confirm image-to-project associations, project years and current status. Years are profile years, not completion claims.
 - The previous homepage labelled an apartment rendering as Nyahururu; this version uses the profile's construction image. Confirm the association before release.
@@ -87,3 +87,5 @@ Light neutral backgrounds, dark green-charcoal text, soft sage accents and blue 
 Manrope is the primary font; Cormorant Garamond supports selected italic phrases. Fonts are self-hosted through Next.js.
 
 Screenshots and browser results are in artifacts/. Reviewed at 1440px, 768px, 390px and 320px. No horizontal overflow or broken images was detected. The former project dialog and capability accordion have been replaced by direct page links. Current homepage browser checks cover responsive layout, images, destination links and mobile navigation.
+
+The Compliance page offers the supplied 2026 company profile as a PDF download at /documents/dunhill-company-profile-2026.pdf (7,974,710 bytes). Current certificates remain available by request. Navigation and enquiry labels now use Plant & Machinery; the existing /plant-workshops URL is retained. Former Start a project calls to action read Contact us.

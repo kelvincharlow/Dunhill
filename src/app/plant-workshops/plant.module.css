@@ -1,7 +1,7 @@
 .hero { padding-top:42px; }
 .heading { display:flex; align-items:flex-end; justify-content:space-between; gap:48px; margin:24px 0 36px; }
 .heading h1 { font-size:clamp(60px,6.5vw,92px); line-height:1.02; letter-spacing:-.065em; font-weight:500; }
-.heading em { color:#687b60; }
+.heading em { color:var(--sage, #687b60); }
 .heading>div { max-width:360px; padding-bottom:5px; }
 .heading p { font-size:14px; }
 .heading .location { font-size:11px; border-top:1px solid var(--line); padding-top:16px; margin-top:20px; }
@@ -15,7 +15,7 @@
 .jump a:hover { color:var(--blue); }
 .equipment { display:grid; grid-template-columns:1fr 1fr; gap:clamp(36px,6vw,85px); padding-block:56px 64px; align-items:start; }
 .siteVisual { position:sticky; top:112px; }
-.siteVisual figure { position:relative; height:560px; margin:0; background:#d5dcd1; }
+.siteVisual figure { position:relative; height:560px; margin:0; background:var(--image-surface, #d5dcd1); }
 .siteVisual img { object-fit:cover; object-position:45% center; }
 .siteVisual figcaption { position:absolute; left:22px; bottom:22px; padding:11px 14px; background:var(--paper); font-size:9px; letter-spacing:.12em; }
 .siteVisual>a { margin-top:18px; font-size:12px; }
@@ -28,22 +28,22 @@
 .inventory dd { margin:8px 0 0 31px; color:var(--muted); font-size:12px; line-height:1.65; }
 .note { font-size:10px; margin-block:20px 8px; }
 .equipment>div>a { font-size:12px; }
-.workshops { padding-block:56px; background:#eceee7; }
+.workshops { padding-block:56px; background:var(--surface, #eceee7); }
 .workshopHeading { display:flex; align-items:flex-end; justify-content:space-between; gap:36px; margin-bottom:32px; }
 .workshopHeading h2 { font-size:clamp(36px,3.8vw,54px); margin-top:18px; }
 .workshopHeading>p { max-width:340px; font-size:14px; }
 .workshopGrid { display:grid; grid-template-columns:1fr 1fr; gap:28px; }
 .workshopGrid article { min-width:0; background:var(--paper); }
-.drawing { padding:22px 28px 0; background:#e5ddcf; color:#77644c; }
+.drawing { padding:22px 28px 0; background:var(--timber-surface, #e5ddcf); color:var(--timber-ink, #6e5c45); }
 .drawing>span { font-size:9px; letter-spacing:.13em; }
 .drawing svg { display:block; width:100%; height:180px; }
-.metal .drawing { background:#243b3d; color:#c4d6c1; }
+.metal .drawing { background:var(--metal-surface, #243b3d); color:#c4d6c1; }
 .workshopBody { padding:30px; }
 .workshopBody h3 { font-size:34px; font-weight:500; letter-spacing:-.04em; }
 .workshopBody>p { font-size:13px; max-width:390px; margin-top:14px; }
 .workshopBody ul { list-style:none; padding:0; margin:22px 0; }
 .workshopBody li { padding-block:11px; border-bottom:1px solid var(--line); font-size:13px; }
-.workshopBody li::before { content:"+"; color:#687b60; margin-right:12px; }
+.workshopBody li::before { content:"+"; color:var(--sage, #687b60); margin-right:12px; }
 .workshopBody>a { font-size:12px; }
 .workshopBody>a:last-child { display:flex; width:fit-content; margin-top:12px; }
 .delivery { display:grid; grid-template-columns:1fr 1fr; gap:80px; padding-block:64px; }
@@ -54,7 +54,7 @@
 .delivery li>span { font-size:10px; color:var(--muted); padding-top:5px; }
 .delivery h3 { font-size:22px; font-weight:500; letter-spacing:-.035em; }
 .delivery li p { font-size:12px; margin-top:8px; max-width:380px; }
-.contact { display:flex; align-items:center; justify-content:space-between; gap:30px; padding:32px 36px; background:#dce6d2; margin-bottom:64px; }
+.contact { display:flex; align-items:center; justify-content:space-between; gap:30px; padding:32px 36px; background:var(--surface-accent, #dce6d2); margin-bottom:64px; }
 .contact h2 { font-size:clamp(30px,3vw,44px); }
 .contact p { font-size:13px; margin-top:14px; }
 .contact>a { flex-shrink:0; font-size:12px; }

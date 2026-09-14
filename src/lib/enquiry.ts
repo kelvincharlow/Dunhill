@@ -1,4 +1,4 @@
-export const serviceInterests = ["General enquiry", "Building construction", "Civil engineering & road works", "Industrial construction", "Renovation & refurbishment", "Timber joinery", "Metal & structural fabrication", "Plant & workshops", "Compliance documents", "Other"];
+export const serviceInterests = ["General enquiry", "Building construction", "Civil engineering & road works", "Industrial construction", "Renovation & refurbishment", "Timber joinery", "Metal & structural fabrication", "Plant & machinery", "Compliance documents", "Other"];
 export const projectValues = ["Not specified", "Under KSh 10 million", "KSh 10–50 million", "KSh 50–100 million", "KSh 100–500 million", "Over KSh 500 million", "Prefer to discuss"];
 export type Enquiry = { name:string; company:string; email:string; phone:string; service:string; location:string; value:string; description:string; consent:boolean; website:string };
 export function validateEnquiry(input: unknown): { data?: Enquiry; error?: string } {

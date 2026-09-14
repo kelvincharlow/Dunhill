@@ -1,12 +1,12 @@
 .hero { padding-top:42px; }
 .heading { display:flex; align-items:flex-end; justify-content:space-between; gap:40px; margin:20px 0 32px; }
 .heading h1 { font-size:clamp(76px,9vw,128px); font-weight:500; line-height:1; letter-spacing:-.07em; }
-.heading h1>span { color:#81966e; }
+.heading h1>span { color:var(--sage, #81966e); }
 .heading>p { font-size:14px; padding-bottom:8px; }
 .portfolio { padding-bottom:48px; }
 .filters { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 18px; padding-top:24px; border-top:1px solid var(--line); }
 .filters>a { display:flex; align-items:center; gap:12px; min-height:44px; padding:11px 14px; font-size:11px; border:1px solid var(--line); }
-.filters>a[aria-current] { background:var(--ink); color:white; border-color:var(--ink); }
+.filters>a[aria-current] { background:var(--button-bg); color:var(--button-text); border-color:var(--ink); }
 .filters>a:hover { border-color:var(--ink); }
 .filters span { font-size:9px; opacity:.7; }
 .resultsHeading { display:flex; align-items:center; justify-content:space-between; gap:20px; margin-bottom:24px; }
@@ -14,14 +14,14 @@
 .resultsHeading>a { font-size:11px; min-height:44px; display:flex; align-items:center; gap:18px; flex-shrink:0; }
 .grid { display:grid; grid-template-columns:1fr 1fr; gap:28px; }
 .card { min-width:0; }
-.cardImage { position:relative; height:clamp(310px,34vw,480px); overflow:hidden; background:#e4e9df; }
+.cardImage { position:relative; height:clamp(310px,34vw,480px); overflow:hidden; background:var(--image-surface, #e4e9df); }
 .cardImage>img { object-fit:cover; transition:transform .4s; }
 .card:hover img,.card:focus-visible img { transform:scale(1.025); }
 .arrow { position:absolute; right:20px; bottom:20px; width:46px; height:46px; display:grid; place-items:center; background:var(--paper); font-size:24px; }
-.card:hover .arrow,.card:focus-visible .arrow { background:var(--ink); color:white; }
+.card:hover .arrow,.card:focus-visible .arrow { background:var(--button-bg); color:var(--button-text); }
 .cardCaption { display:flex; justify-content:space-between; gap:20px; padding-top:18px; }
 .cardCaption h2 { font-size:28px; font-weight:500; letter-spacing:-.04em; line-height:1.2; text-wrap:initial; }
-.empty { padding:64px 28px; text-align:center; background:#e9eee5; }
+.empty { padding:64px 28px; text-align:center; background:var(--surface, #e9eee5); }
 .empty h2 { font-size:34px; }
 .empty p { font-size:14px; margin:18px auto 24px; max-width:400px; }
 .note { font-size:10px; margin-top:24px; max-width:680px; }

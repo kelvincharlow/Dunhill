@@ -1,3 +1,4 @@
+import { ArrowIcon } from "@/components/arrow-icon";
 import Link from "next/link";
 import Image from "next/image";
 import { SiteHeader } from "@/components/site-header";
@@ -21,51 +22,50 @@ export default function Home() {
     <SiteHeader />
     <main id="main" tabIndex={-1}>
       <section className={heroStyles.hero} id="home" aria-labelledby="hero-title">
-        <div className={heroStyles.heading}>
-          <div className={heroStyles.title}>
-          <p className="eyebrow"><span className="status-dot" />Building Kenya since 1983</p>
-          <h1 id="hero-title">Building excellence.</h1>
-          <p className={heroStyles.tagline}>Creating landmarks.</p>
-          </div>
-          <div className={heroStyles.introduction}>
-            <p>Construction, civil engineering and specialist craftsmanship. Four decades of bringing Kenya’s homes, workplaces and infrastructure to life.</p>
-            <div className={heroStyles.actions}>
-              <Link className="button" href="/projects">Explore our work <span aria-hidden="true">↗</span></Link>
-              <Link className="quiet-link" href="/about">Get to know us <span aria-hidden="true">↗</span></Link>
-            </div>
-          </div>
-        </div>
         <figure className={heroStyles.visual}>
-          <Image src="/images/profile/crescent-pearl-b.jpeg" alt="Crescent Pearl rising above the trees in Westlands, Nairobi" fill preload sizes="(max-width: 800px) calc(100vw - 44px), (max-width: 1199px) 51vw, (max-width: 1472px) 49vw, 734px" />
-          <span className={heroStyles.edition}>SELECTED WORK / 01</span>
+          <Image src="/images/profile/crescent-pearl-b.jpeg" alt="Crescent Pearl in Westlands, Nairobi" fill preload sizes="100vw" />
           <figcaption className={heroStyles.caption}>
-            <div><span>RESIDENTIAL / 2025</span><strong>Crescent Pearl</strong><p>Westlands, Nairobi</p></div>
-            <Link href="/projects/crescent-pearl" aria-label="Explore Crescent Pearl">Explore project <span aria-hidden="true">↗</span></Link>
+            <Link href="/projects/crescent-pearl" aria-label="View Crescent Pearl project">
+              <span className={heroStyles.projectInfo}><small>FEATURED PROJECT</small><strong>Crescent Pearl</strong><span>Westlands, Nairobi</span></span>
+              <span className={heroStyles.projectArrow} aria-hidden="true"><ArrowIcon /></span>
+            </Link>
           </figcaption>
         </figure>
+        <div className={heroStyles.heading}>
+          <p className="eyebrow">Building Kenya since 1983</p>
+          <h1 id="hero-title">Building excellence.</h1>
+          <p className={heroStyles.tagline}>Creating landmarks.</p>
+        </div>
+        <div className={`wrap ${heroStyles.introduction}`}>
+          <p>Construction, civil engineering and specialist craftsmanship. Built on four decades of experience.</p>
+          <div className={heroStyles.actions}>
+            <Link className="button" href="/projects">Explore our work <span aria-hidden="true"><ArrowIcon /></span></Link>
+            <Link className="quiet-link" href="/contact">Contact us <span aria-hidden="true"><ArrowIcon /></span></Link>
+          </div>
+        </div>
       </section>
 
       <section className={`wrap ${styles.trust}`} aria-label="Company highlights">
         <div><strong>1983</strong><span>Building Kenya since</span></div>
         <div><strong>NCA 1<span>*</span></strong><span>Building contractor category</span></div>
         <div><strong>In-house</strong><span>Timber & metal workshops</span></div>
-        <Link href="/compliance" className={styles.trustLink}>*Category stated in our company profile.<br />View credentials & request current licences <span aria-hidden="true">↗</span></Link>
+        <Link href="/compliance" className={styles.trustLink}>*Category stated in our company profile.<br />View credentials & request current licences <span aria-hidden="true"><ArrowIcon /></span></Link>
       </section>
 
       <section className={styles.projects} id="projects" aria-labelledby="projects-title">
         <div className="wrap">
           <div className="section-label"><span>01 / SELECTED WORK</span><span>THE DUNHILL PORTFOLIO</span></div>
-          <div className={styles.sectionHeading}><h2 id="projects-title">See what<br /><em>we build.</em></h2><Link className="text-link" href="/projects">View all projects <span aria-hidden="true">↗</span></Link></div>
+          <div className={styles.sectionHeading}><h2 id="projects-title">See what<br /><em>we build.</em></h2><Link className="text-link" href="/projects">View all projects <span aria-hidden="true"><ArrowIcon /></span></Link></div>
           <ProjectShowcase />
         </div>
       </section>
 
       <section className={`wrap ${styles.section}`} id="capabilities" aria-labelledby="services-title">
         <div className="section-label"><span>02 / WHAT WE DO</span><span>FROM STRUCTURE TO FINISH</span></div>
-        <div className={styles.sectionHeading}><h2 id="services-title">The expertise<br /><em>your project needs.</em></h2><Link className="text-link" href="/services">Explore our services <span aria-hidden="true">↗</span></Link></div>
+        <div className={styles.sectionHeading}><h2 id="services-title">The expertise<br /><em>your project needs.</em></h2><Link className="text-link" href="/services">Explore our services <span aria-hidden="true"><ArrowIcon /></span></Link></div>
         <div className={styles.services}>{services.map(service => <Link href={service.href} key={service.href} className={styles.serviceCard}>
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d={service.icon} /></svg>
-          <h3>{service.title}</h3><p>{service.copy}</p><span className={styles.cardArrow} aria-hidden="true">↗</span>
+          <h3>{service.title}</h3><p>{service.copy}</p><span className={styles.cardArrow} aria-hidden="true"><ArrowIcon /></span>
         </Link>)}</div>
       </section>
 
@@ -76,7 +76,7 @@ export default function Home() {
           <h2 id="company-title">Built on experience.<br /><em>Backed by capability.</em></h2>
           <p>Operating since 1983 and incorporated in 1997, we bring together construction teams, our own plant, and timber and metal workshops to take projects from structure to finishing.</p>
           <ul className={styles.values}><li>Trust</li><li>Integrity</li><li>Collaboration</li></ul>
-          <div className={styles.companyLinks}><Link className="text-link" href="/about">Our story & team <span aria-hidden="true">↗</span></Link><Link className="text-link" href="/plant-workshops">Our plant & workshops <span aria-hidden="true">↗</span></Link></div>
+          <div className={styles.companyLinks}><Link className="text-link" href="/about">Our story & team <span aria-hidden="true"><ArrowIcon /></span></Link><Link className="text-link" href="/plant-workshops">Our plant & machinery <span aria-hidden="true"><ArrowIcon /></span></Link></div>
         </div>
       </section>
 
@@ -88,7 +88,7 @@ export default function Home() {
 
       <section className={`wrap ${styles.contact}`} id="contact" aria-labelledby="contact-title">
         <div><p className="eyebrow">LET’S BUILD WHAT’S NEXT</p><h2 id="contact-title">Your project.<br /><em>Our next conversation.</em></h2><p>Tell us what you’re planning. We’ll help you take the next step.</p></div>
-        <div className={styles.contactActions}><Link className="button" href="/contact">Start a project <span aria-hidden="true">↗</span></Link><a className="quiet-link" href="mailto:info@dunhillbcon.com">Email our team <span aria-hidden="true">↗</span></a></div>
+        <div className={styles.contactActions}><Link className="button" href="/contact">Contact us <span aria-hidden="true"><ArrowIcon /></span></Link><a className="quiet-link" href="mailto:info@dunhillbcon.com">Email our team <span aria-hidden="true"><ArrowIcon /></span></a></div>
       </section>
     </main>
     <InnerFooter />

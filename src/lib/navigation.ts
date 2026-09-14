@@ -1,6 +1,6 @@
 export const navigation = [
   ["Home", "home"], ["About", "about"], ["Services", "services"],
-  ["Projects", "projects"], ["Plant & Workshops", "plant-workshops"], ["Compliance", "compliance"],
+  ["Projects", "projects"], ["Plant & Machinery", "plant-workshops"], ["Compliance", "compliance"],
 ];
 
 export function navigationHref(id: string, onAbout = false) {

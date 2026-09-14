@@ -1,4 +1,7 @@
 "use client";
+
+import { ArrowIcon } from "@/components/arrow-icon";
+
 import { useState, type FormEvent } from "react";
 import { projectValues, serviceInterests, validateEnquiry } from "@/lib/enquiry";
 import styles from "@/app/contact/contact.module.css";
@@ -49,9 +52,9 @@ export function EnquiryForm({ deliveryEnabled, initialService = "", initialDescr
     </div></fieldset></details>
     <div className={styles.trap} aria-hidden="true"><label>Leave this field empty<input name="website" tabIndex={-1} autoComplete="off" /></label></div>
     <label className={styles.consent}><input name="consent" type="checkbox" required disabled={busy} /><span>I agree that Dunhill may use these details to respond to my enquiry. *</span></label>
-    <button className="button" type="submit" disabled={busy}>{busy ? "Submitting…" : deliveryEnabled ? "Submit enquiry" : "Prepare email draft"}<span aria-hidden="true">↗</span></button>
+    <button className="button" type="submit" disabled={busy}>{busy ? "Submitting…" : deliveryEnabled ? "Submit enquiry" : "Prepare email draft"}<span aria-hidden="true"><ArrowIcon /></span></button>
     <div role="status" aria-live="polite" aria-atomic="true">{status && <p className={styles.feedback}>{status}</p>}</div>
-    {draft && !accepted && <a className="text-link" href={draft}>Open email draft <span aria-hidden="true">↗</span></a>}
+    {draft && !accepted && <a className="text-link" href={draft}>Open email draft <span aria-hidden="true"><ArrowIcon /></span></a>}
     <noscript><p>Please enable JavaScript to use the form, or email info@dunhillbcon.com directly.</p></noscript>
   </form>;
 }

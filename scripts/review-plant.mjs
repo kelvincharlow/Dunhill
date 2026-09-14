@@ -31,10 +31,10 @@ await new Promise(r=>setTimeout(r,1200));
 results.push(await evaluate(`(async()=>{const links=[...new Set([...document.querySelectorAll('main a[href^="/"]')].map(a=>a.getAttribute('href')))];return {destinations:await Promise.all(links.map(async href=>({href,status:(await fetch(href)).status})))};})()`));
 for(const result of results) {
   if(result.scrollWidth>result.width||result.brokenImages||result.brokenAnchors?.length) throw Error(JSON.stringify(result));
-  if(result.active&&result.active!=="Plant & Workshops") throw Error("Incorrect active page");
+  if(result.active&&result.active!=="Plant & Machinery") throw Error("Incorrect active page");
   if(result.destinations?.some(link=>link.status!==200)) throw Error("Broken destination");
 }
-for (const [id,expected] of [["equipment","Plant & workshops"],["joinery-workshop","Timber joinery"],["metal-workshop","Metal & structural fabrication"],["contact","Plant & workshops"]]) {
+for (const [id,expected] of [["equipment","Plant & machinery"],["joinery-workshop","Timber joinery"],["metal-workshop","Metal & structural fabrication"],["contact","Plant & machinery"]]) {
   await call("Page.navigate",{url:"http://localhost:3000/plant-workshops#"+id});
   await new Promise(r=>setTimeout(r,1000));
   await evaluate(`document.querySelector('#${id} a[href^="/contact?"]').click()`);

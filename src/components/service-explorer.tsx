@@ -1,5 +1,8 @@
 "use client";
 
+import { ArrowIcon } from "@/components/arrow-icon";
+
+
 import { useEffect, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
@@ -28,14 +31,14 @@ export function ServiceExplorer() {
 
   return <div ref={container}>
     <nav className={styles.directory} aria-label="Choose a service">
-      {services.map((service, index) => <a key={service.id} href={`#${service.id}`} onClick={() => reveal(service.id)}><small>0{index + 1}</small>{service.short}<span aria-hidden="true">↓</span></a>)}
+      {services.map((service, index) => <a key={service.id} href={`#${service.id}`} onClick={() => reveal(service.id)}><small>0{index + 1}</small>{service.short}<span aria-hidden="true"><ArrowIcon direction="down" /></span></a>)}
     </nav>
     <section className={styles.explorer} id="service-directory" aria-labelledby="expertise-title">
       <div className={styles.visual}>
         <div className={styles.photo}><Image src="/images/profile/industrial-05.jpeg" alt="Construction work from Dunhill’s company profile" fill sizes="(max-width: 800px) calc(100vw - 44px), 36vw" /><span>ON SITE. IN THE DETAIL.</span></div>
         <h2 id="expertise-title">The right expertise.<br /><em>For your next step.</em></h2>
         <p>Choose a service to see what’s included and explore our experience.</p>
-        <Link className="text-link" href="/projects">See our work <span aria-hidden="true">↗</span></Link>
+        <Link className="text-link" href="/projects">See our work <span aria-hidden="true"><ArrowIcon /></span></Link>
       </div>
       <div className={styles.services}>
         {services.map((service, index) => <details key={service.id} id={service.id} name="dunhill-services" open={index === 0} className={styles.service}>
@@ -43,8 +46,8 @@ export function ServiceExplorer() {
           <div className={styles.serviceBody}>
             <p className="eyebrow">HOW WE CAN HELP</p>
             <ul>{service.scope.map(item => <li key={item}>{item}</li>)}</ul>
-            <div className={styles.evidence}><p>{service.evidence}</p><Link href={service.href}>{service.related} <span aria-hidden="true">↗</span></Link></div>
-            <Link className="button" href={`/contact?service=${encodeURIComponent(service.title)}#enquiry`}>Discuss {service.short.toLowerCase()} <span aria-hidden="true">↗</span></Link>
+            <div className={styles.evidence}><p>{service.evidence}</p><Link href={service.href}>{service.related} <span aria-hidden="true"><ArrowIcon /></span></Link></div>
+            <Link className="button" href={`/contact?service=${encodeURIComponent(service.title)}#enquiry`}>Discuss {service.short.toLowerCase()} <span aria-hidden="true"><ArrowIcon /></span></Link>
           </div>
         </details>)}
       </div>

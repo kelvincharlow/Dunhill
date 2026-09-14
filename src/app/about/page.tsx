@@ -1,3 +1,4 @@
+import { ArrowIcon } from "@/components/arrow-icon";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
@@ -31,7 +32,7 @@ export default function About() {
         <div className={`wrap ${styles.heroInner}`}>
           <p className={styles.heroLabel}>DUNHILL / THE COMPANY BEHIND THE WORK</p>
           <h1 id="about-title">More than<br />what we build.</h1>
-          <div className={styles.heroBottom}><a href="#history">Get to know Dunhill <span aria-hidden="true">↓</span></a><p>Kenyan roots. Skilled hands.<br />A story that began in 1983.</p></div>
+          <div className={styles.heroBottom}><a href="#history">Get to know Dunhill <span aria-hidden="true"><ArrowIcon direction="down" /></span></a><p>Kenyan roots. Skilled hands.<br />A story that began in 1983.</p></div>
         </div>
       </section>
 
@@ -42,7 +43,7 @@ export default function About() {
           <div className={styles.storyDetails}>
             <div className={styles.dates}><div><strong>1983</strong><span>Operations begin in Kenya</span></div><div><strong>1997</strong><span>Incorporated in Nairobi</span></div></div>
             <p>From homes and workplaces to industrial facilities and civil infrastructure, our experience has grown alongside our client relationships.</p>
-            <Link className="text-link" href="/projects">Explore our building story <span aria-hidden="true">↗</span></Link>
+            <Link className="text-link" href="/projects">Explore our building story <span aria-hidden="true"><ArrowIcon /></span></Link>
             <figure className={styles.storyInset}><div><Image src="/images/profile/national-park-villas.jpeg" alt="Completed villa exteriors at National Park Villas, Mlolongo" fill sizes="(max-width: 800px) calc(100vw - 80px), 28vw" /></div><figcaption>NATIONAL PARK VILLAS / MLOLONGO</figcaption></figure>
           </div>
         </div>
@@ -71,14 +72,14 @@ export default function About() {
           <h2 id="resources-title">People. Plant.<br /><em>Practical capability.</em></h2>
           <p>Our site teams are supported by construction plant and our timber joinery and metal fabrication workshops in Embakasi, off Mombasa Road.</p>
           <ul><li>Plant & machinery</li><li>Timber joinery</li><li>Metal & structural fabrication</li></ul>
-          <Link className="text-link" href="/plant-workshops">Explore our plant & workshops <span aria-hidden="true">↗</span></Link>
-          <Link className="quiet-link" href="/services">Find the right service <span aria-hidden="true">↗</span></Link>
+          <Link className="text-link" href="/plant-workshops">Explore our plant & machinery <span aria-hidden="true"><ArrowIcon /></span></Link>
+          <Link className="quiet-link" href="/services">Find the right service <span aria-hidden="true"><ArrowIcon /></span></Link>
         </div>
       </section>
 
-      <aside className={`wrap ${styles.credentials}`} aria-label="Company credentials"><div><strong>Get to know our credentials.</strong><p>Company documentation and contractor registration information.</p></div><Link className="text-link" href="/compliance">View credentials <span aria-hidden="true">↗</span></Link></aside>
+      <aside className={`wrap ${styles.credentials}`} aria-label="Company credentials"><div><strong>Get to know our credentials.</strong><p>Company documentation and contractor registration information.</p></div><Link className="text-link" href="/compliance">View credentials <span aria-hidden="true"><ArrowIcon /></span></Link></aside>
 
-      <section className={`wrap ${styles.contact}`} id="contact" aria-labelledby="contact-title"><div><p className="eyebrow">NOW, LET’S TALK ABOUT YOUR STORY</p><h2 id="contact-title">Let’s build<br /><em>what comes next.</em></h2><p>Tell us about your plans. We’ll start with a conversation.</p></div><div className={styles.contactActions}><Link className="button" href="/contact">Start a project <span aria-hidden="true">↗</span></Link><a className="quiet-link" href="mailto:info@dunhillbcon.com">Email our team <span aria-hidden="true">↗</span></a></div></section>
+      <section className={`wrap ${styles.contact}`} id="contact" aria-labelledby="contact-title"><div><p className="eyebrow">NOW, LET’S TALK ABOUT YOUR STORY</p><h2 id="contact-title">Let’s build<br /><em>what comes next.</em></h2><p>Tell us about your plans. We’ll start with a conversation.</p></div><div className={styles.contactActions}><Link className="button" href="/contact">Contact us <span aria-hidden="true"><ArrowIcon /></span></Link><a className="quiet-link" href="mailto:info@dunhillbcon.com">Email our team <span aria-hidden="true"><ArrowIcon /></span></a></div></section>
     </main>
     <InnerFooter />
   </>;

@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Cormorant_Garamond, Manrope } from "next/font/google";
 import "./globals.css";
+import { themeScript } from "@/lib/theme";
 
 const manrope = Manrope({
   subsets: ["latin"],
@@ -24,5 +25,5 @@ export const metadata: Metadata = {
 export const viewport: Viewport = { width: "device-width", initialScale: 1, themeColor: "#101820" };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  return <html lang="en" data-scroll-behavior="smooth" className={`${manrope.variable} ${cormorant.variable}`}><body>{children}</body></html>;
+  return <html lang="en" data-scroll-behavior="smooth" suppressHydrationWarning className={`${manrope.variable} ${cormorant.variable}`}><head><script dangerouslySetInnerHTML={{ __html: themeScript }} /></head><body>{children}</body></html>;
 }
