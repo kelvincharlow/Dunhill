@@ -34,7 +34,10 @@ test("published projects map details and reject unsafe/incomplete documents", ()
 });
 
 test("featured selection and category return links use CMS records", () => {
-  const project = sanityProject(doc, "x7trmz7f", "production")!;
+  const project = sanityProject({ ...doc, category: "Apartments" }, "x7trmz7f", "production")!;
+  assert.equal(project.category, "Apartments");
+  assert.equal(portfolioState("Apartments", [project]).href, "/projects?category=Apartments");
+  assert.equal(portfolioState("Apartments", [project]).visible.length, 1);
   const another = { ...project, slug: "another", featured: false, category: "Villas & townhouses" };
   assert.deepEqual(featuredProjects([another, project]).map(p => p.slug), [project.slug]);
   assert.deepEqual(featuredProjects([another]).map(p => p.slug), [another.slug]);
