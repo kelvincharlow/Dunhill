@@ -24,8 +24,9 @@ export const revalidate = 60;
 export default async function Home() {
   const projects = await getProjects();
   const featured = featuredProjects(projects);
-  // Keep the low-resolution Darakasi cover in the portfolio, outside the full-width hero.
-  const slides: HeroSlide[] = projects.flatMap(({ slug, title, location, cover }) => cover && slug !== "sands-of-darakasi" ? [{ slug, title, location, cover }] : []);
+  // Only images 1–6 belong in the hero; keep the full project list for the portfolio.
+  // Keep the low-resolution Darakasi cover outside the full-width hero.
+  const slides: HeroSlide[] = projects.flatMap(({ slug, title, location, cover }) => cover && slug !== "sands-of-darakasi" ? [{ slug, title, location, cover }] : []).slice(0, 6);
   return <>
     <a className="skip-link" href="#main">Skip to content</a>
     <SiteHeader />
